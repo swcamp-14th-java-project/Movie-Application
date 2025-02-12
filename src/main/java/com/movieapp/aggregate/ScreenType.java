@@ -4,7 +4,8 @@ public enum ScreenType {
     TWOD("2D"),
     THREED("3D"),
     FOURDX("4DX"),
-    SCREENX("ScreenX");
+    SCREENX("ScreenX"),
+    IMAX("Imax");
 
     String screenType;
     ScreenType(String screenType) {
