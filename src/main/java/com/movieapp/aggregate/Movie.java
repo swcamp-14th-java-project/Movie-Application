@@ -21,8 +21,9 @@ public class Movie implements Serializable {
     public Movie() {
     }
     
-    // 영화 등록 번호 제외 생성자
-    public Movie(Theater theaterName, String movieName, double movieRating, MovieGenre movieGenre, MovieGrade movieGrade, int runningTime, LocalDate date, LocalTime startTime, int emptySeats, ScreenType screenType) {
+    // 모든 매개변수 넣는 생성자
+    public Movie(int movieNo, Theater theaterName, String movieName, double movieRating, MovieGenre movieGenre, MovieGrade movieGrade, int runningTime, LocalDate date, LocalTime startTime, int emptySeats, ScreenType screenType) {
+        this.movieNo = movieNo;
         this.theaterName = theaterName;
         this.movieName = movieName;
         this.movieRating = movieRating;
