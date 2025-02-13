@@ -39,7 +39,9 @@ public class MovieRepository {
             initializeData();
         }
 
-//        loadMovies();       // 영화 정보 리스트 읽어오기
+        System.out.println("파일이 이미 존재합니다. ");
+
+        loadMovies();       // 영화 정보 리스트 읽어오기
         loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
 
@@ -170,6 +172,8 @@ public class MovieRepository {
             while(true){
                 movieList.add((MovieInfo) ois.readObject());
             }
+        } catch(EOFException e){
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -201,5 +205,8 @@ public class MovieRepository {
             throw new RuntimeException(e);
         }
     }
-
+    // 영화 정보 목록을 보여주는 메소드
+    public List<MovieInfo> selectAllMovies() {
+        return movieList;
+    }
 }
