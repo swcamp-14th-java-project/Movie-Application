@@ -23,10 +23,10 @@ public class Application {
 
             switch (input) {
                 case 1:
-                    ms.showAllMovies();
+
                     break;
                 case 2:
-
+                    ms.ticketReservation();
                     break;
                 case 3:
                     break;
