@@ -39,7 +39,9 @@ public class MovieRepository {
             initializeData();
         }
 
+
         loadMovies();       // 영화 정보 리스트 읽어오기
+
 //        loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
 
