@@ -39,11 +39,9 @@ public class MovieRepository {
             initializeData();
         }
 
-        loadMovies();       // 영화 정보 리스트 읽어오기
+//        loadMovies();       // 영화 정보 리스트 읽어오기
         loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
-
-
 
     private void initializeData() {
         System.out.println("initializeData");
@@ -60,6 +58,9 @@ public class MovieRepository {
         defaultMovieList.add(new MovieInfo(7, "쿠로코의 농구 라스트 게임", 9.48, MovieGenre.ANIMATION, MovieGrade.TWELVE, 91));
 
         System.out.println("영화 리스트 생성: " + defaultMovieList);
+
+        movieList.addAll(defaultMovieList);
+
         // 파일에 작성
         saveMovieList(defaultMovieList);
 
@@ -67,6 +68,7 @@ public class MovieRepository {
         // 영화 상영 스케줄표가 존재하지 않으면 생성됨
         // 🎥 상영 스케줄 리스트 생성 (2025년 12월 12일 ~ 12월 19일 범위)
         List<MovieSchedule> defaultScheduleList = new ArrayList<>();
+        System.out.println("defaultScheduleList : " + defaultScheduleList);
 
 
         defaultScheduleList.add(new MovieSchedule(movieList.get(1), 1, Theater.GANGNAM, LocalDate.of(2025, 12, 12), LocalTime.of(10, 0), 60, ScreenType.TWOD));
@@ -141,9 +143,13 @@ public class MovieRepository {
             for(MovieSchedule s : defaultScheduleList){
                 oos.writeObject(s);
             }
+            System.out.println("여기???");
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (EOFException e) {
+            throw new RuntimeException(e);
+        }catch (IOException e) {
             throw new RuntimeException(e);
         }finally{
             try{
@@ -185,7 +191,11 @@ public class MovieRepository {
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
+
+        }catch(EOFException e){
+
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
