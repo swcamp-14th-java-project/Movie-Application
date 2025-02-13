@@ -6,6 +6,7 @@ import com.movieapp.aggregate.Theater;
 import com.movieapp.repository.MovieRepository;
 
 import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +38,15 @@ public class MovieService {
                 System.out.println(theater);
                 filteredSchedules = mr.selectTheaterSchedule(theater);
                 break;
-            case 3:
+            case 3:     // 영화 별로 조회
+//                List<MovieInfo> movies = mr.selectAllMovies();
+//                String movieName = movies.get(secondFilter).getMovieName();
+                filteredSchedules = mr.selectedMovieInfoSchedule(secondFilter);
                 break;
-            case 4:
+            case 4:     // 날짜별로 조회
+                int days = secondFilter + 11; // 12일 ~ 19일
+
+
                 break;
 
         }

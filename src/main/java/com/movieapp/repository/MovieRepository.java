@@ -74,26 +74,26 @@ public class MovieRepository {
         System.out.println("defaultScheduleList : " + defaultScheduleList);
 
 
-        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 1, Theater.GANGNAM, LocalDate.of(2025, 12, 12), LocalTime.of(10, 0), 60, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(0), 2, Theater.GANGNAM, LocalDate.of(2025, 12, 12), LocalTime.of(13, 0), 50, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(2), 3, Theater.GANGNAM, LocalDate.of(2025, 12, 12), LocalTime.of(16, 0), 45, ScreenType.FOURDX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(5), 4, Theater.KONKKUK, LocalDate.of(2025, 12, 13), LocalTime.of(10, 0), 45, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(6), 5, Theater.KONKKUK, LocalDate.of(2025, 12, 13), LocalTime.of(13, 0), 60, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 6, Theater.APGUJEONG, LocalDate.of(2025, 12, 14), LocalTime.of(11, 0), 55, ScreenType.IMAX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(3), 7, Theater.APGUJEONG, LocalDate.of(2025, 12, 14), LocalTime.of(14, 0), 50, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(4), 8, Theater.APGUJEONG, LocalDate.of(2025, 12, 14), LocalTime.of(17, 0), 40, ScreenType.SCREENX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(0), 9, Theater.IPARK, LocalDate.of(2025, 12, 15), LocalTime.of(10, 30), 70, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(2), 10, Theater.IPARK, LocalDate.of(2025, 12, 15), LocalTime.of(13, 30), 60, ScreenType.FOURDX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(5), 11, Theater.GANGNAM, LocalDate.of(2025, 12, 16), LocalTime.of(10, 0), 50, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(6), 12, Theater.GANGNAM, LocalDate.of(2025, 12, 16), LocalTime.of(14, 30), 55, ScreenType.IMAX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 13, Theater.KONKKUK, LocalDate.of(2025, 12, 17), LocalTime.of(11, 30), 45, ScreenType.SCREENX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(3), 14, Theater.KONKKUK, LocalDate.of(2025, 12, 17), LocalTime.of(15, 30), 40, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(4), 15, Theater.APGUJEONG, LocalDate.of(2025, 12, 18), LocalTime.of(12, 0), 65, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(2), 16, Theater.APGUJEONG, LocalDate.of(2025, 12, 18), LocalTime.of(15, 0), 55, ScreenType.FOURDX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(0), 17, Theater.IPARK, LocalDate.of(2025, 12, 19), LocalTime.of(10, 0), 60, ScreenType.IMAX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(6), 18, Theater.IPARK, LocalDate.of(2025, 12, 19), LocalTime.of(14, 30), 50, ScreenType.SCREENX));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(5), 19, Theater.GANGNAM, LocalDate.of(2025, 12, 19), LocalTime.of(18, 0), 45, ScreenType.TWOD));
-        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 20, Theater.KONKKUK, LocalDate.of(2025, 12, 19), LocalTime.of(21, 0), 35, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 1, Theater.GANGNAM, LocalDate.of(2025, 02, 12), LocalTime.of(10, 0), 60, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(0), 2, Theater.GANGNAM, LocalDate.of(2025, 02, 12), LocalTime.of(13, 0), 50, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(2), 3, Theater.GANGNAM, LocalDate.of(2025, 02, 12), LocalTime.of(16, 0), 45, ScreenType.FOURDX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(5), 4, Theater.KONKKUK, LocalDate.of(2025, 02, 13), LocalTime.of(10, 0), 45, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(6), 5, Theater.KONKKUK, LocalDate.of(2025, 02, 13), LocalTime.of(13, 0), 60, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 6, Theater.APGUJEONG, LocalDate.of(2025, 02, 14), LocalTime.of(11, 0), 55, ScreenType.IMAX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(3), 7, Theater.APGUJEONG, LocalDate.of(2025, 02, 14), LocalTime.of(14, 0), 50, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(4), 8, Theater.APGUJEONG, LocalDate.of(2025, 02, 14), LocalTime.of(17, 0), 40, ScreenType.SCREENX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(0), 9, Theater.IPARK, LocalDate.of(2025, 02, 15), LocalTime.of(10, 30), 70, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(2), 10, Theater.IPARK, LocalDate.of(2025, 02, 15), LocalTime.of(13, 30), 60, ScreenType.FOURDX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(5), 11, Theater.GANGNAM, LocalDate.of(2025, 02, 16), LocalTime.of(10, 0), 50, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(6), 12, Theater.GANGNAM, LocalDate.of(2025, 02, 16), LocalTime.of(14, 30), 55, ScreenType.IMAX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 13, Theater.KONKKUK, LocalDate.of(2025, 02, 17), LocalTime.of(11, 30), 45, ScreenType.SCREENX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(3), 14, Theater.KONKKUK, LocalDate.of(2025, 02, 17), LocalTime.of(15, 30), 40, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(4), 15, Theater.APGUJEONG, LocalDate.of(2025, 02, 18), LocalTime.of(12, 0), 65, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(2), 16, Theater.APGUJEONG, LocalDate.of(2025, 02, 18), LocalTime.of(15, 0), 55, ScreenType.FOURDX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(0), 17, Theater.IPARK, LocalDate.of(2025, 02, 19), LocalTime.of(10, 0), 60, ScreenType.IMAX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(6), 18, Theater.IPARK, LocalDate.of(2025, 02, 19), LocalTime.of(14, 30), 50, ScreenType.SCREENX));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(5), 19, Theater.GANGNAM, LocalDate.of(2025, 02, 19), LocalTime.of(18, 0), 45, ScreenType.TWOD));
+        defaultScheduleList.add(new MovieSchedule(movieList.get(1), 20, Theater.KONKKUK, LocalDate.of(2025, 02, 19), LocalTime.of(21, 0), 35, ScreenType.TWOD));
 
         System.out.println("스케줄표: " + defaultScheduleList);
         // 파일에 작성
@@ -227,5 +227,17 @@ public class MovieRepository {
         }
 
         return theaterSchedule;
+    }
+
+    public List<MovieSchedule> selectedMovieInfoSchedule(int secondFilter) {
+        List<MovieSchedule> movieinfoSchedule = new ArrayList<>();
+
+        // 필터링
+        for(MovieSchedule s : movieSchedule){
+            if(s.getMovieInfo().getMovieNo() == secondFilter){
+                movieinfoSchedule.add(s);
+            }
+        }
+        return movieinfoSchedule;
     }
 }
