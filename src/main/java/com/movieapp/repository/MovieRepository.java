@@ -33,13 +33,15 @@ public class MovieRepository {
     // 기본 생성자
     public MovieRepository() {
         System.out.println("MovieRepository 생성 테스트 ");
-        
+
         if(!movieFile.exists() && ! scheduleFile.exists()) {
             System.out.println("파일 생성하러 가기");
             initializeData();
         }
 
-         loadMovies();       // 영화 정보 리스트 읽어오기
+
+        loadMovies();       // 영화 정보 리스트 읽어오기
+
 //        loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
 
