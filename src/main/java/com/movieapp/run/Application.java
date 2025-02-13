@@ -10,7 +10,6 @@ public class Application {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         while(true) {
             System.out.println("===== CGV에 오신 것을 환영합니다! =====");
             System.out.println("1. 영화 상영 정보 보기");
@@ -24,8 +23,10 @@ public class Application {
 
             switch (input) {
                 case 1:
+                    ms.showAllMovies();
                     break;
                 case 2:
+
                     break;
                 case 3:
                     break;
