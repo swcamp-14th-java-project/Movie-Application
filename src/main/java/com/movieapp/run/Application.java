@@ -63,6 +63,8 @@ public class Application {
         switch(filterNo){
             case 1:     // 전체 스케줄 표 조회
                 // deepFilterNo == 0 으로 전달
+//                deepFilterNo = 0;
+                ms.showAllSchedule();
                 break;
             case 2:     // 극장 별로 조회
                 // 극장 목록 보여주고
@@ -86,9 +88,15 @@ public class Application {
                 break;
             case 4:     // 날짜 별로 조회
                 // 날짜 목록(2월 12일 ~ 2월 19일)을 보여주고
+                int dateCount = 1;
+                String[] days = {"수", "목", "금", "토", "일", "월", "화", "수"};
+                for(int i=12; i<=19; i++){
+                    System.out.println(dateCount + ". 2월 " + i + "일" + days[dateCount-1]);
+                    dateCount++;
+                }
 
-
-                // 날짜 목록 번호(1  ~ 7)를 입력받아서 전달할까?
+                System.out.print("조회할 날짜 번호를 입력해주세요: ");
+                deepFilterNo = sc.nextInt();
                 break;
         }
 //        ms.showMovieSchedule(); 에 전달해야 할 것 {filterNo, deepFilterNo} <int, int> 쌍 객체?

@@ -6,6 +6,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MovieRepository {
@@ -205,8 +206,13 @@ public class MovieRepository {
             throw new RuntimeException(e);
         }
     }
-    // 영화 정보 목록을 보여주는 메소드
+    // 영화 정보 목록 전체를 전달하는 메소드
     public List<MovieInfo> selectAllMovies() {
         return movieList;
+    }
+    // 상영 스케줄 표 전체를 전달하는 메소드
+    public List<MovieSchedule> selectAllSchedules() {
+        movieSchedule.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+        return movieSchedule;
     }
 }
