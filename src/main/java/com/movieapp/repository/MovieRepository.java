@@ -21,25 +21,25 @@ public class MovieRepository {
 
     // 영화 정보 리스트가 저장되어 있는 파일
     private final File movieFile =
-            new File("Movie-Application/src/main/java/com/movieapp/db/movieListDB.dat");
+            new File("src/main/java/com/movieapp/db/movieListDB.dat");
 
     // 영화 상영 스케줄표가 저장되어 있는 파일
     private final File scheduleFile =
-            new File("Movie-Application/src/main/java/com/movieapp/db/movieScheduleDB.dat");
+            new File("src/main/java/com/movieapp/db/movieScheduleDB.dat");
 
     private final File ticketFile =
-            new File("Movie-Application/src/main/java/com/movieapp/db/ticketListDB.dat");
+            new File("src/main/java/com/movieapp/db/ticketListDB.dat");
 
     // 기본 생성자
     public MovieRepository() {
         System.out.println("MovieRepository 생성 테스트 ");
-        
-        if(!movieFile.exists() && ! scheduleFile.exists()) {
+
+        if (!movieFile.exists() && !scheduleFile.exists()) {
             System.out.println("파일 생성하러 가기");
             initializeData();
         }
 
-//        loadMovies();       // 영화 정보 리스트 읽어오기
+        loadMovies();       // 영화 정보 리스트 읽어오기
         loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
 
@@ -105,14 +105,14 @@ public class MovieRepository {
 
         System.out.println("여기는0");  // OK
 
-        try{
+        try {
             oos = new ObjectOutputStream(
                     new BufferedOutputStream(
                             new FileOutputStream((movieFile))
                     )
             );
             System.out.println("여기는1");
-            for(MovieInfo m : defaultMovieList){
+            for (MovieInfo m : defaultMovieList) {
                 oos.writeObject(m);
             }
             System.out.println("여기는?");
@@ -120,9 +120,9 @@ public class MovieRepository {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally{
-            try{
-                if(oos != null) oos.close();
+        } finally {
+            try {
+                if (oos != null) oos.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -133,14 +133,14 @@ public class MovieRepository {
     private void saveMovieSchedule(List<MovieSchedule> defaultScheduleList) {
         System.out.println("saveMovieSchedule");
         ObjectOutputStream oos = null;
-        try{
+        try {
             oos = new ObjectOutputStream(
                     new BufferedOutputStream(
                             new FileOutputStream((scheduleFile))
                     )
             );
             System.out.println("saveMovieSchedule write Object");
-            for(MovieSchedule s : defaultScheduleList){
+            for (MovieSchedule s : defaultScheduleList) {
                 oos.writeObject(s);
             }
             System.out.println("여기???");
@@ -149,11 +149,11 @@ public class MovieRepository {
             throw new RuntimeException(e);
         } catch (EOFException e) {
             throw new RuntimeException(e);
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally{
-            try{
-                if(oos != null) oos.close();
+        } finally {
+            try {
+                if (oos != null) oos.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -162,16 +162,18 @@ public class MovieRepository {
 
     private void loadMovies() {
         // 파일이 존재할 경우 파일에서 movieSchedule로 가져오기 (db -> load)
-        try(ObjectInputStream ois = new ObjectInputStream(
+        try (ObjectInputStream ois = new ObjectInputStream(
                 new BufferedInputStream(
                         new FileInputStream(movieFile)
                 )
         )) {
-            while(true){
+            while (true) {
                 movieList.add((MovieInfo) ois.readObject());
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (EOFException e) {
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -181,25 +183,48 @@ public class MovieRepository {
 
     private void loadSchedules() {
         // 파일이 존재할 경우 파일에서 movieSchedule로 가져오기 (db -> load)
-        try(ObjectInputStream ois = new ObjectInputStream(
+        try (ObjectInputStream ois = new ObjectInputStream(
                 new BufferedInputStream(
                         new FileInputStream(scheduleFile)
                 )
         )) {
-            while(true){
+            while (true) {
                 movieSchedule.add((MovieSchedule) ois.readObject());
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
 
-        }catch(EOFException e){
+        } catch (EOFException e) {
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public ArrayList<MovieSchedule> selectByTheater(int theaterNum) {
+        ArrayList<MovieSchedule> returnMovie = new ArrayList<>();
+        Theater theater = null;
+        switch (theaterNum) {
+            case 1:
+                theater = Theater.GANGNAM;
+                break;
+            case 2:
+                theater = Theater.KONKKUK;
+                break;
+            case 3:
+                theater = Theater.APGUJEONG;
+                break;
+            case 4:
+                theater = Theater.IPARK;
+                break;
+        }
+        for (MovieSchedule m : movieSchedule) {
+            if (theater == m.getTheaterName()) {
+                returnMovie.add(m);
+            }
+        }
+        return returnMovie;
+    }
 }
