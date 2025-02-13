@@ -6,6 +6,7 @@ import com.movieapp.aggregate.Theater;
 import com.movieapp.repository.MovieRepository;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -32,8 +33,12 @@ public class MovieService {
         LocalDate localDate = null;
 
         ArrayList<MovieSchedule> findMovie = new ArrayList<>();
+        ArrayList<MovieInfo> movieName = new ArrayList<>();
 
         switch (filter[0]) {
+            case 0:
+                movieName = mr.selectAllMovie();
+                movieName.forEach(System.out::println);
             // 극장별
             case 1:
                 switch (filter[1]) {
@@ -54,7 +59,7 @@ public class MovieService {
                 break;
             // 영화별
             case 2:
-                ArrayList<MovieInfo> movieName = mr.selectAllMovie();
+                movieName = mr.selectAllMovie();
                 movieName.forEach(System.out::println);
                 movieInfo = movieName.get(filter[1] - 1);
                 System.out.println("movieInfo = " + movieInfo);
@@ -62,7 +67,11 @@ public class MovieService {
                 break;
             // 날짜별
             case 3:
-                localDate =
+                String date = "2025-02-" + filter[1];
+                localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                System.out.println("date = " + date);
+                System.out.println("localDate = " + localDate);
+                findMovie = mr.selectByDate(localDate);
                 break;
         }
         findMovie.forEach(System.out::println);

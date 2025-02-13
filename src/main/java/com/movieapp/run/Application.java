@@ -63,6 +63,8 @@ public class Application {
         }
         if(mainFilter > 0 && mainFilter < 4)
             subFilter = deepFilter(mainFilter);
+        else if(mainFilter == 0)
+            subFilter = 1;
         else
             return null;
 
