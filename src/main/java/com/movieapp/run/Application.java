@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Application {
 
-    private final MovieService ms = new MovieService();
+    private static final MovieService ms = new MovieService();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
