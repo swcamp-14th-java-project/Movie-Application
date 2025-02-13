@@ -21,14 +21,17 @@ public class MovieRepository {
 
     // 영화 정보 리스트가 저장되어 있는 파일
     private final File movieFile =
-            new File("Movie-Application/src/main/java/com/movieapp/db/movieListDB.dat");
+            new File("src/main/java/com/movieapp/db/movieListDB.dat");
 
     // 영화 상영 스케줄표가 저장되어 있는 파일
     private final File scheduleFile =
-            new File("Movie-Application/src/main/java/com/movieapp/db/movieScheduleDB.dat");
+            new File("src/main/java/com/movieapp/db/movieScheduleDB.dat");
 
     private final File ticketFile =
-            new File("Movie-Application/src/main/java/com/movieapp/db/ticketListDB.dat");
+            new File("src/main/java/com/movieapp/db/ticketListDB.dat");
+    public List<MovieInfo> selectAllMovie() {
+            return movieList;
+    }
 
     // 기본 생성자
     public MovieRepository() {

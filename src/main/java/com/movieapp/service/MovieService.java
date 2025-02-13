@@ -1,6 +1,10 @@
 package com.movieapp.service;
 
+import com.movieapp.aggregate.MovieInfo;
 import com.movieapp.repository.MovieRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MovieService {
 
@@ -11,6 +15,9 @@ public class MovieService {
     }
   
     public void showAllMovies() {
-      
+        }
+
+    public void cancelReservation() {
+
     }
 }

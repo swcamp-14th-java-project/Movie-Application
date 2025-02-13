@@ -26,13 +26,13 @@ public class Application {
                     ms.showAllMovies();
                     break;
                 case 2:
-
                     break;
                 case 3:
                     break;
                 case 4:
                     break;
                 case 5:
+                    ms.cancelReservation();
                     break;
                 case 9:
                     System.out.println("CGV 예매 프로그램을 종료합니다. 안녕히 가세요");
@@ -41,5 +41,11 @@ public class Application {
                     System.out.println("번호를 잘못 입력하셨습니다");
             }
         }
+    }
+
+    private static int ReservationNo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("예매번호를 입력하세요: ");
+        return sc.nextInt();
     }
 }
