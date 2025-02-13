@@ -10,10 +10,10 @@ import java.util.List;
 
 public class MovieRepository {
     /* 설명. 프로그램이 실행될 때 (초기화 - 파일 없을 때)
-    *   1. 영화 목록 리스트가 먼저 생성됨
-    *   2. 영화 상영 스케줄 파일이 생성됨
-    */
-    
+     *   1. 영화 목록 리스트가 먼저 생성됨
+     *   2. 영화 상영 스케줄 파일이 생성됨
+     */
+
     // MovieRepository에서 관리할 "영화리스트", "상영스케줄", "예매내역목록" 컬렉션
     private final List<MovieInfo> movieList = new ArrayList<>();   // 영화 정보 리스트
     private final List<MovieSchedule> movieSchedule = new ArrayList<MovieSchedule>();   // 영화 상영스케줄표 목록
@@ -36,7 +36,7 @@ public class MovieRepository {
             initializeData();
         }
 
-        loadMovies();       // 영화 정보 리스트 읽어오기 
+        loadMovies();       // 영화 정보 리스트 읽어오기
         loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
 
