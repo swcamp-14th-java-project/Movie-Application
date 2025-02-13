@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MovieSchedule {
-    private int movieNo;            // 영화 번호
+    private MovieInfo movieInfo;    // 영화 정보
     private int scheduleNo;         // 상영 번호
     private Theater theaterName;    // 극장
     private LocalDate date;         // 상영날짜 (월, 일)
@@ -15,8 +15,8 @@ public class MovieSchedule {
     public MovieSchedule() {
     }
 
-    public MovieSchedule(int movieNo, int scheduleNo, Theater theaterName, LocalDate date, LocalTime startTime, int emptySeats, ScreenType screenType) {
-        this.movieNo = movieNo;
+    public MovieSchedule(MovieInfo movieInfo, int scheduleNo, Theater theaterName, LocalDate date, LocalTime startTime, int emptySeats, ScreenType screenType) {
+        this.movieInfo = movieInfo;
         this.scheduleNo = scheduleNo;
         this.theaterName = theaterName;
         this.date = date;
@@ -26,12 +26,12 @@ public class MovieSchedule {
     }
 
 
-    public int getMovieNo() {
-        return movieNo;
+    public MovieInfo getMovieInfo() {
+        return movieInfo;
     }
 
-    public void setMovieNo(int movieNo) {
-        this.movieNo = movieNo;
+    public void setMovieNo(MovieInfo movieInfo) {
+        this.movieInfo = movieInfo;
     }
 
     public int getScheduleNo() {
@@ -85,7 +85,7 @@ public class MovieSchedule {
     @Override
     public String toString() {
         return "MovieSchedule{" +
-                "movieNo=" + movieNo +
+                "movieInfo=" + movieInfo.getMovieNo() + " : " + movieInfo.getMovieName() +
                 ", scheduleNo=" + scheduleNo +
                 ", theaterName=" + theaterName +
                 ", date=" + date +
