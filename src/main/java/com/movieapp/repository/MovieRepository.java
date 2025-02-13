@@ -29,21 +29,18 @@ public class MovieRepository {
 
     private final File ticketFile =
             new File("src/main/java/com/movieapp/db/ticketListDB.dat");
-    public List<MovieInfo> selectAllMovie() {
-            return movieList;
-    }
 
     // 기본 생성자
     public MovieRepository() {
         System.out.println("MovieRepository 생성 테스트 ");
-        
+
         if(!movieFile.exists() && ! scheduleFile.exists()) {
             System.out.println("파일 생성하러 가기");
             initializeData();
         }
 
-//        loadMovies();       // 영화 정보 리스트 읽어오기
-        loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
+        loadMovies();       // 영화 정보 리스트 읽어오기
+//        loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
 
     private void initializeData() {
@@ -173,6 +170,8 @@ public class MovieRepository {
             while(true){
                 movieList.add((MovieInfo) ois.readObject());
             }
+        } catch(EOFException e){
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -203,6 +202,14 @@ public class MovieRepository {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<MovieInfo> getAllMovieInfo() {
+        return movieList;
+    }
+
+    public List<MovieSchedule> getAllMovieSchedule() {
+        return movieSchedule;
     }
 
 }
