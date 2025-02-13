@@ -203,27 +203,31 @@ public class MovieRepository {
         }
     }
 
-    public ArrayList<MovieSchedule> selectByTheater(int theaterNum) {
+    public ArrayList<MovieSchedule> selectByTheater(Theater theater) {
         ArrayList<MovieSchedule> returnMovie = new ArrayList<>();
-        Theater theater = null;
-        switch (theaterNum) {
-            case 1:
-                theater = Theater.GANGNAM;
-                break;
-            case 2:
-                theater = Theater.KONKKUK;
-                break;
-            case 3:
-                theater = Theater.APGUJEONG;
-                break;
-            case 4:
-                theater = Theater.IPARK;
-                break;
-        }
+
         for (MovieSchedule m : movieSchedule) {
             if (theater == m.getTheaterName()) {
                 returnMovie.add(m);
             }
+        }
+        return returnMovie;
+    }
+
+    public ArrayList<MovieSchedule> selectByMovie(String movieName) {
+        ArrayList<MovieSchedule> returnMovie = new ArrayList<>();
+        for (MovieSchedule m : movieSchedule) {
+            if(movieName.equals(m.getMovieInfo().getMovieName())) {
+                returnMovie.add(m);
+            }
+        }
+        return returnMovie;
+    }
+
+    public ArrayList<MovieInfo> selectAllMovie() {
+        ArrayList<MovieInfo> returnMovie = new ArrayList<>();
+        for (MovieInfo m : movieList){
+            returnMovie.add(m);
         }
         return returnMovie;
     }
