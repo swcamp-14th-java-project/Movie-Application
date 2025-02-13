@@ -215,4 +215,17 @@ public class MovieRepository {
         movieSchedule.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
         return movieSchedule;
     }
+    // 극장 이름을 전달받아, 해당 극장에 해당하는 영화 상영 스케줄표를 전달하는 메서드
+    public List<MovieSchedule> selectTheaterSchedule(Theater theater) {
+        List<MovieSchedule> theaterSchedule = new ArrayList<>();
+
+        // 필터링
+        for(MovieSchedule s : movieSchedule){
+            if(s.getTheaterName().equals(theater)){
+                theaterSchedule.add(s);
+            }
+        }
+
+        return theaterSchedule;
+    }
 }
