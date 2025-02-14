@@ -16,7 +16,7 @@ public class MovieRepository {
 
     // MovieRepository에서 관리할 "영화리스트", "상영스케줄", "예매내역목록" 컬렉션
     private final List<MovieInfo> movieList = new ArrayList<>();   // 영화 정보 리스트
-    private final List<MovieSchedule> movieSchedule = new ArrayList<MovieSchedule>();   // 영화 상영스케줄표 목록
+    private final List<MovieSchedule> movieSchedule = new ArrayList<>();   // 영화 상영스케줄표 목록
     private final List<Ticket> ticketList = new ArrayList<>();     // 예매 내역 목록
 
     // 영화 정보 리스트가 저장되어 있는 파일
@@ -34,13 +34,14 @@ public class MovieRepository {
     public MovieRepository() {
         System.out.println("MovieRepository 생성 테스트 ");
 
-        if (!movieFile.exists() && !scheduleFile.exists()) {
+        if (!movieFile.exists() || !scheduleFile.exists() || !ticketFile.exists()) {
             System.out.println("파일 생성하러 가기");
             initializeData();
         }
 
         loadMovies();       // 영화 정보 리스트 읽어오기
         loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
+        loadTickets();      // 티켓 예매 정보 가져오기
     }
 
     private void initializeData() {
@@ -48,6 +49,7 @@ public class MovieRepository {
         // 영화 목록 파일이 존재하지 않으면 생성됨
         // 🎬 영화 정보 리스트 생성
         List<MovieInfo> defaultMovieList = new ArrayList<>();
+
 
         defaultMovieList.add(new MovieInfo(1, "캡틴 아메리카: 브레이브 뉴 월드", 9.44, MovieGenre.ACTION, MovieGrade.TWELVE, 118));
         defaultMovieList.add(new MovieInfo(2, "말할 수 없는 비밀", 8.38, MovieGenre.ROMANCE, MovieGrade.ALL, 103));
@@ -95,6 +97,9 @@ public class MovieRepository {
         System.out.println("스케줄표: " + defaultScheduleList);
         // 파일에 작성
         saveMovieSchedule(defaultScheduleList);
+
+        List<Ticket> defaultTicketList = new ArrayList<>();
+        saveTicketList(defaultTicketList);
     }
 
     // 영화 정보 목록을 파일로 덮어 씌우는 메서드
@@ -161,6 +166,57 @@ public class MovieRepository {
         }
     }
 
+    private void saveTicketList(List<Ticket> defaultTicketList) {
+        System.out.println("saveTicketList");
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(
+                    new BufferedOutputStream(
+                            new FileOutputStream((ticketFile))
+                    )
+            );
+            System.out.println("saveTicketList write Object");
+            for (Ticket t : defaultTicketList) {
+                oos.writeObject(t);
+            }
+            System.out.println("여기???");
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (EOFException e) {
+
+
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (oos != null) oos.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void loadTickets() {
+        // 파일이 존재할 경우 파일에서 Ticket 가져오기 (db -> load)
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new BufferedInputStream(
+                        new FileInputStream(ticketFile)
+                )
+        )) {
+            while (true) {
+                ticketList.add((Ticket) ois.readObject());
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }catch(EOFException e){
+
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void loadMovies() {
         // 파일이 존재할 경우 파일에서 movieSchedule로 가져오기 (db -> load)
         try (ObjectInputStream ois = new ObjectInputStream(

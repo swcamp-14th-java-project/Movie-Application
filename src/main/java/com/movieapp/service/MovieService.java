@@ -1,8 +1,6 @@
 package com.movieapp.service;
 
-import com.movieapp.aggregate.MovieInfo;
-import com.movieapp.aggregate.MovieSchedule;
-import com.movieapp.aggregate.Theater;
+import com.movieapp.aggregate.*;
 
 import com.movieapp.aggregate.MovieInfo;
 import com.movieapp.aggregate.MovieSchedule;
@@ -123,6 +121,23 @@ public class MovieService {
         System.out.println("===== 해당 영화의 상영 스케줄입니다 ===== ");
 
         // 해당 번호의 영화스케줄을 불러와야함. 함수를 따로 작성해야 할듯.
+        List<MovieSchedule> filteredSchedules = mr.selectedMovieInfoSchedule(movieNo);
+
+        int index = 1;
+        for(MovieSchedule m : filteredSchedules) {
+            System.out.println(index + ". " + m);
+            index++;
+        }
+        System.out.print("예매할 영화 번호를 선택해주세요: ");
+        movieNo = sc.nextInt();
+        System.out.print("예매할 인원 수를 선택해주세요: ");
+        int people = sc.nextInt();
+
+        System.out.println("선택한 영화는");
+        System.out.println(filteredSchedules.get(movieNo-1) + "인원 수는 " + people);
+
+        sc.nextLine();
+        System.out.print("좌석 열을 선택하세요: ");
 
 
     }
