@@ -4,6 +4,8 @@ import com.movieapp.aggregate.Theater;
 import com.movieapp.service.MovieService;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Application {
 
@@ -11,6 +13,7 @@ public class Application {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         while(true) {
             System.out.println("===== \uD83C\uDFAC CGV에 오신 것을 환영합니다! \uD83C\uDFAC =====");
             System.out.println("1. \uD83D\uDCFD\uFE0F 영화 상영 스케줄 표 보기");
@@ -24,6 +27,7 @@ public class Application {
 
             switch (input) {
                 case 1:
+
                     ms.showMovieSchedule(chooseScheduleFilter());
                     break;
                 case 2:

@@ -3,6 +3,7 @@ package com.movieapp.service;
 import com.movieapp.aggregate.MovieInfo;
 import com.movieapp.aggregate.MovieSchedule;
 import com.movieapp.aggregate.Theater;
+
 import com.movieapp.aggregate.MovieInfo;
 import com.movieapp.aggregate.MovieSchedule;
 import com.movieapp.repository.MovieRepository;
@@ -102,6 +103,7 @@ public class MovieService {
         for(MovieInfo movieInfo : allMovies) {
             System.out.println(movieInfo.getMovieNo() + ". " + movieInfo.getMovieName());
         }
+
 
     }
 
