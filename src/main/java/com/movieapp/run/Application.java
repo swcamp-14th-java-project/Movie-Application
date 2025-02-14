@@ -24,7 +24,7 @@ public class Application {
 
             switch (input) {
                 case 1:
-                    ms.showMovieSchedule(chooseScheduleFilter());
+                    ms.showMovieSchedule(getScheduleFilter());
                     break;
                 case 2:
                     ms.ticketReservation();
@@ -44,7 +44,7 @@ public class Application {
         }
     }
 
-    private static int[] chooseScheduleFilter() {
+    private static int[] getScheduleFilter() {
         Scanner sc = new Scanner(System.in);
 
         // 필터링 번호, 조회 번호
@@ -61,6 +61,11 @@ public class Application {
         if(mainFilter > 4 || mainFilter < 1) {
             return null;
         }
+        int subFilter = getSubFilter(mainFilter, sc);
+        return new int[]{mainFilter, subFilter};
+    }
+
+    private static int getSubFilter(int mainFilter, Scanner sc) {
         // 필터링 번호(1 ~ 4) 가 들어옴.
         int subFilter = 0;
 
@@ -95,6 +100,6 @@ public class Application {
         if(mainFilter > 1){
             subFilter = sc.nextInt();
         }
-        return new int[]{mainFilter, subFilter};
+        return subFilter;
     }
 }
