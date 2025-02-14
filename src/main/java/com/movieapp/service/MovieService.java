@@ -25,15 +25,11 @@ public class MovieService {
     }
 
     public void findMovieSchedule(int[] filter) {
-        Scanner sc = new Scanner(System.in);
         if(filter == null)
             return;
-        int mainFilter = filter[0];
-        MovieInfo movieInfo = null;
-        LocalDate localDate = null;
 
-        ArrayList<MovieSchedule> findMovie = new ArrayList<>();
-        ArrayList<MovieInfo> movieName = new ArrayList<>();
+        ArrayList<MovieSchedule> findMovie = null;
+        ArrayList<MovieInfo> movieName = null;
 
         switch (filter[0]) {
             case 0:
@@ -50,18 +46,20 @@ public class MovieService {
             // 영화별
             case 2:
                 movieName = mr.selectAllMovie();
-                movieInfo = movieName.get(filter[1] - 1);
-                System.out.println("movieInfo = " + movieInfo);
+                MovieInfo movieInfo = movieName.get(filter[1] - 1);
+                System.out.println("선택한 영화: " + movieInfo.getMovieName());
                 findMovie = mr.selectByMovie(movieInfo.getMovieName());
                 break;
             // 날짜별
             case 3:
-                String date = "2025-02-" + filter[1];
-                localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate localDate = LocalDate.of(2025, 2, filter[1]);
                 System.out.println(localDate + "일의 영화 목록");
                 findMovie = mr.selectByDate(localDate);
                 break;
         }
-        findMovie.forEach(System.out::println);
+        if(findMovie.size() != 0)
+            findMovie.forEach(System.out::println);
+        else
+            System.out.println("해당하는 영화가 없습니다.");
     }
 }

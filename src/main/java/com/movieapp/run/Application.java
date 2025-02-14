@@ -29,7 +29,6 @@ public class Application {
                     ms.findMovieSchedule(chooseFilter());
                     break;
                 case 2:
-
                     break;
                 case 3:
                     break;
@@ -60,18 +59,23 @@ public class Application {
         System.out.print("메뉴 선택: ");
 
         int input = sc.nextInt();
-        if (input == 9){
+        if (input == 9) {
             return null;
         } else {
             mainFilter = input;
         }
-        if(mainFilter > 0 && mainFilter < 4)
+        if (mainFilter > 0 && mainFilter < 4)
             subFilter = deepFilter(mainFilter);
-        else if(mainFilter == 0)
+        else if (mainFilter == 0)
             subFilter = 1;
-        else
+        else {
+            System.out.println("번호를 잘못 입력하였습니다.");
+            System.out.println("메인 메뉴로 돌아갑니다.");
             return null;
-
+        }
+        if (subFilter == -1){
+            return null;
+        }
 
         return new int[]{mainFilter, subFilter};
     }
@@ -79,11 +83,11 @@ public class Application {
     private static int deepFilter(int mainFilter) {
         int result = 0;
         Scanner sc = new Scanner(System.in);
-        switch(mainFilter){
+        switch (mainFilter) {
             // 극장 별로 조회
             case 1:
                 // 극장 목록 출력
-                Stream.of(Theater.values()).forEach(t -> System.out.println((t.ordinal()+1) + ". " + t));
+                Stream.of(Theater.values()).forEach(t -> System.out.println((t.ordinal() + 1) + ". " + t));
                 System.out.print("극장 번호 입력: ");
                 break;
             // 영화 별로 조회
@@ -98,6 +102,7 @@ public class Application {
                 IntStream intStream = IntStream.range(12, 20);
                 intStream.forEach(d -> System.out.println("2025년 02월 " + d + "일"));
                 System.out.print("날짜 입력(일): ");
+
                 break;
             default:
                 System.out.println("번호를 잘못 입력하였습니다.");
