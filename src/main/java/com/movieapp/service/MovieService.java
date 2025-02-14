@@ -20,7 +20,8 @@ public class MovieService {
     }
   
     public void showAllMovies() {
-      
+        ArrayList<MovieInfo> movieName = mr.selectAllMovie();
+        movieName.forEach(System.out::println);
     }
 
     public void findMovieSchedule(int[] filter) {
@@ -28,7 +29,6 @@ public class MovieService {
         if(filter == null)
             return;
         int mainFilter = filter[0];
-        Theater theater = null;
         MovieInfo movieInfo = null;
         LocalDate localDate = null;
 
@@ -37,30 +37,19 @@ public class MovieService {
 
         switch (filter[0]) {
             case 0:
+                // 네임 말고 전부 조회
                 movieName = mr.selectAllMovie();
                 movieName.forEach(System.out::println);
+                break;
             // 극장별
             case 1:
-                switch (filter[1]) {
-                    case 1:
-                        theater = Theater.GANGNAM;
-                        break;
-                    case 2:
-                        theater = Theater.KONKKUK;
-                        break;
-                    case 3:
-                        theater = Theater.APGUJEONG;
-                        break;
-                    case 4:
-                        theater = Theater.IPARK;
-                        break;
-                }
+                Theater theater = Theater.values()[filter[1] - 1];
+                System.out.println("선택한 극장: " + theater);
                 findMovie = mr.selectByTheater(theater);
                 break;
             // 영화별
             case 2:
                 movieName = mr.selectAllMovie();
-                movieName.forEach(System.out::println);
                 movieInfo = movieName.get(filter[1] - 1);
                 System.out.println("movieInfo = " + movieInfo);
                 findMovie = mr.selectByMovie(movieInfo.getMovieName());
@@ -69,8 +58,7 @@ public class MovieService {
             case 3:
                 String date = "2025-02-" + filter[1];
                 localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                System.out.println("date = " + date);
-                System.out.println("localDate = " + localDate);
+                System.out.println(localDate + "일의 영화 목록");
                 findMovie = mr.selectByDate(localDate);
                 break;
         }

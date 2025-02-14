@@ -1,8 +1,11 @@
 package com.movieapp.run;
 
+import com.movieapp.aggregate.Theater;
 import com.movieapp.service.MovieService;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Application {
 
@@ -49,6 +52,7 @@ public class Application {
         int subFilter = 0;
 
         System.out.println("영화 상영 정보 조회 메뉴");
+        System.out.println("0. 전제 영화 상영 정보 조회");
         System.out.println("1. 극장 별로 조회");
         System.out.println("2. 영화 별로 조회");
         System.out.println("3. 날짜 별로 조회");
@@ -68,7 +72,7 @@ public class Application {
         else
             return null;
 
-        System.out.println(mainFilter + " " + subFilter);
+
         return new int[]{mainFilter, subFilter};
     }
 
@@ -79,19 +83,26 @@ public class Application {
             // 극장 별로 조회
             case 1:
                 // 극장 목록 출력
-                System.out.print("극장 입력: ");
+                Stream.of(Theater.values()).forEach(t -> System.out.println((t.ordinal()+1) + ". " + t));
+                System.out.print("극장 번호 입력: ");
                 break;
             // 영화 별로 조회
             case 2:
                 // 영화 목록 출력
-                System.out.print("영화 입력: ");
+                ms.showAllMovies();
+                System.out.print("영화 번호 입력: ");
                 break;
             // 날짜별로 조회
             case 3:
                 // 날짜 출력
-                System.out.print("날짜 입력: ");
+                IntStream intStream = IntStream.range(12, 20);
+                intStream.forEach(d -> System.out.println("2025년 02월 " + d + "일"));
+                System.out.print("날짜 입력(일): ");
                 break;
-
+            default:
+                System.out.println("번호를 잘못 입력하였습니다.");
+                System.out.println("메인 메뉴로 돌아갑니다.");
+                return -1;
         }
         result = sc.nextInt();
         return result;
