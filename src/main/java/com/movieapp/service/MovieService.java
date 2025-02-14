@@ -136,19 +136,28 @@ public class MovieService {
         System.out.println("선택한 영화는");
         System.out.println(filteredSchedules.get(movieNo-1) + "인원 수는 " + people);
 
-        System.out.print("좌석 열을 선택하세요: ");
-        SeatRow seatRow = SeatRow.valueOf(sc.next().toUpperCase());
-        sc.nextLine();
+        SeatRow[] seatRow = new SeatRow[people];
+        SeatColumn[] column = new SeatColumn[people];
+        for (int i = 0; i < people; i++) {
+            System.out.print("좌석 열을 선택하세요: ");
+            seatRow[i] = SeatRow.valueOf(sc.next().toUpperCase());
+            sc.nextLine();
 
-        System.out.print("좌석 번호를 선택하세요: ");
+            System.out.print("좌석 번호를 선택하세요: ");
 
-        SeatColumn column = SeatColumn.fromInt(sc.nextInt());
-
-        System.out.println("선택한 좌석: " + seatRow + "열 " + column + "번");
+            column[i] = SeatColumn.fromInt(sc.nextInt());
+            System.out.println("선택한 좌석: " + seatRow[i] + "열 " + column[i] + "번");
+        }
 
         int price = 15000;
-        Ticket ticket = new Ticket(filteredSchedules.get(movieNo-1).getScheduleNo(), people, column, seatRow, price * people);
-        System.out.println(ticket);
+
+        int lastTicketNum = mr.selectLastTicketNo();
+        Ticket[] ticket = new Ticket[people];
+        for (int i = 0; i < people; i++) {
+            ticket[i] = new Ticket(lastTicketNum + 1, filteredSchedules.get(movieNo-1).getScheduleNo(), people, column[i], seatRow[i], price * people);
+        }
+//        Ticket ticket = new Ticket(lastTicketNum, filteredSchedules.get(movieNo-1).getScheduleNo(), people, column, seatRow, price * people);
+//        System.out.println(ticket);
         int result = mr.insertTicket(ticket);
     }
 

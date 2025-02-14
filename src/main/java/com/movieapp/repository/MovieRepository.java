@@ -308,7 +308,7 @@ public class MovieRepository {
         return movieinfoSchedule;
     }
 
-    public int insertTicket(Ticket ticket) {
+    public int insertTicket(Ticket[] ticket) {
         MyObjectOutput moo = null;
         int result = 0;
 
@@ -318,16 +318,18 @@ public class MovieRepository {
                             new FileOutputStream(ticketFile, true)
                     )
             );
-            moo.writeObject(ticket);
+            for (Ticket t : ticket) {
+                moo.writeObject(t);
+                ticketList.add(t);
+            }
 
             /* 설명. 컬렉션에도 신규회원 추가하기
              *  (MyObjectOutputStream으로 이어붙인 정보는 다시 입력받아도 이전 파일로 인식)
              *  (프로그램을 껐다 키면 다시 재인식이 되긴 함)
              *  현재 배운 내용만으로 구현하다 보니 맞이한 한계점
              */
-            ticketList.add(ticket);
 
-            result = 1;
+            result = ticket.length;
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -342,5 +344,12 @@ public class MovieRepository {
 
     public List<Ticket> selectAllTicket() {
         return ticketList;
+    }
+
+    public int selectLastTicketNo() {
+        if(ticketList.isEmpty())
+            return 1;
+        else
+            return ticketList.get(ticketList.size() - 1).getTicketNo();
     }
 }
