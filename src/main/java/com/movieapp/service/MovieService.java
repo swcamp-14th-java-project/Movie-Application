@@ -25,11 +25,9 @@ public class MovieService {
 
         List<MovieSchedule> filteredSchedules = new ArrayList<>();
 
-        System.out.println("여기는 MovieService - show Movie Schedule");
-        System.out.println(firstFilter + " : " + secondFilter);
         switch (firstFilter) {
-            case 1:
-                // 이미 상영 스케줄표 전체 조회 완료
+            case 1: // 전체 상영 스케줄표 조회
+                showAllSchedule();
                 break;
             case 2: // 극장 별로 조회
                 Theater theater = null;
@@ -39,31 +37,31 @@ public class MovieService {
                 filteredSchedules = mr.selectTheaterSchedule(theater);
                 break;
             case 3:     // 영화 별로 조회
-//                List<MovieInfo> movies = mr.selectAllMovies();
-//                String movieName = movies.get(secondFilter).getMovieName();
                 filteredSchedules = mr.selectedMovieInfoSchedule(secondFilter);
                 break;
-            case 4:     // 날짜별로 조회
+            case 4:     // 날짜별로 조회 (ex. 2025-02-16)
                 int days = secondFilter + 11; // 12일 ~ 19일
-
-
+                System.out.println(days);
+                LocalDate selectedDate = LocalDate.of(2025, 2, days);
+                filteredSchedules = mr.selectedDateSchedule(selectedDate);
                 break;
 
+            default:
+                System.out.println("번호를 잘못 입력하셨습니다.");
         }
         for(MovieSchedule movieSchedule : filteredSchedules) {
             System.out.println(movieSchedule.getDate() + " " + movieSchedule.getScheduleNo() + ". " + movieSchedule.getMovieInfo().getMovieName()
                     + " " + movieSchedule.getTheaterName() + " " + movieSchedule.getEmptySeats());
         }
 
-        System.out.println("메인으로 돌아가기");
+        System.out.println("\uD83D\uDD19 메인으로 돌아가기");
 
     }
 
-
+    // 전체 영화 목록 조회
     public  void showAllMovies() {
         List<MovieInfo> allMovies = mr.selectAllMovies();
 
-        System.out.println("Service에서 조회 확인: ");
         System.out.println(allMovies.toString());
         for(MovieInfo movieInfo : allMovies) {
             System.out.println(movieInfo.getMovieNo() + ". " + movieInfo.getMovieName());
@@ -71,10 +69,10 @@ public class MovieService {
 
     }
 
+    // 전체 상영 스케줄표를 조회
     public void showAllSchedule() {
         List<MovieSchedule> allSchedules = mr.selectAllSchedules();
 
-        System.out.println("Service에서 상영 스케줄표 전체 조회 확인");
         System.out.println(allSchedules.toString());
         for(MovieSchedule movieSchedule : allSchedules) {
             System.out.println(movieSchedule.getDate() + " " + movieSchedule.getScheduleNo() + ". " + movieSchedule.getMovieInfo().getMovieName()
