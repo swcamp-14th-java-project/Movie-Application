@@ -6,6 +6,7 @@ import com.movieapp.aggregate.Theater;
 import com.movieapp.repository.MovieRepository;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -52,7 +53,13 @@ public class MovieService {
                 break;
             // 날짜별
             case 3:
-                LocalDate localDate = LocalDate.of(2025, 2, filter[1]);
+                int lastDayOfMonth = YearMonth.of(2025, 2).lengthOfMonth();
+                int day = lastDayOfMonth;
+                if(filter[1] <= 0 || filter[1] > lastDayOfMonth)
+                    day = lastDayOfMonth;
+                else
+                    day = filter[1];
+                LocalDate localDate = LocalDate.of(2025, 2, day);
                 System.out.println(localDate + "일의 영화 목록");
                 findMovie = mr.selectByDate(localDate);
                 break;
