@@ -148,8 +148,9 @@ public class MovieRepository {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (EOFException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+
+
+        }catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
             try {
@@ -172,9 +173,9 @@ public class MovieRepository {
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        } catch (EOFException e) {
+        }catch(EOFException e){
 
-        } catch (IOException e) {
+        }catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -202,43 +203,51 @@ public class MovieRepository {
             throw new RuntimeException(e);
         }
     }
+    // 영화 정보 목록 전체를 전달하는 메소드
+    public List<MovieInfo> selectAllMovies() {
+        return movieList;
+    }
+    // 상영 스케줄 표 전체를 전달하는 메소드
+    public List<MovieSchedule> selectAllSchedules() {
+        movieSchedule.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+        return movieSchedule;
+    }
+    // 극장 이름을 전달받아, 해당 극장에 해당하는 영화 상영 스케줄표를 전달하는 메서드
+    public List<MovieSchedule> selectTheaterSchedule(Theater theater) {
+        List<MovieSchedule> theaterSchedule = new ArrayList<>();
 
-    public ArrayList<MovieSchedule> selectByTheater(Theater theater) {
-        ArrayList<MovieSchedule> returnMovie = new ArrayList<>();
-
-        for (MovieSchedule m : movieSchedule) {
-            if (theater == m.getTheaterName()) {
-                returnMovie.add(m);
+        // 필터링
+        for(MovieSchedule s : movieSchedule){
+            if(s.getTheaterName().equals(theater)){
+                theaterSchedule.add(s);
             }
         }
-        return returnMovie;
+        return theaterSchedule;
     }
 
-    public ArrayList<MovieSchedule> selectByMovie(String movieName) {
-        ArrayList<MovieSchedule> returnMovie = new ArrayList<>();
-        for (MovieSchedule m : movieSchedule) {
-            if(movieName.equals(m.getMovieInfo().getMovieName())) {
-                returnMovie.add(m);
+    public List<MovieSchedule> selectedMovieInfoSchedule(int secondFilter) {
+        List<MovieSchedule> movieinfoSchedule = new ArrayList<>();
+
+        // 필터링
+        for(MovieSchedule s : movieSchedule){
+            if(s.getMovieInfo().getMovieNo() == secondFilter){
+                movieinfoSchedule.add(s);
             }
         }
-        return returnMovie;
+        return movieinfoSchedule;
     }
 
-    public ArrayList<MovieSchedule> selectByDate(LocalDate localDate) {
-        ArrayList<MovieSchedule> returnMovie = new ArrayList<>();
-        for(MovieSchedule m : movieSchedule){
-            if(localDate.equals(m.getDate())){
-                returnMovie.add(m);
+    // 날짜별 상영 스케줄 조회
+    public List<MovieSchedule> selectedDateSchedule(LocalDate selectedDate) {
+        List<MovieSchedule> movieinfoSchedule = new ArrayList<>();
+
+
+        // 필터링
+        for(MovieSchedule s : movieSchedule){
+            if(s.getDate().equals(selectedDate)){
+                movieinfoSchedule.add(s);
             }
         }
-        return returnMovie;
-    }
-
-    public ArrayList<MovieInfo> selectAllMovie() {
-        ArrayList<MovieInfo> returnMovie = new ArrayList<>();
-        for (MovieInfo m : movieList){
-            returnMovie.add(m);
-        }
-        return returnMovie;
+        return movieinfoSchedule;
     }
 }
