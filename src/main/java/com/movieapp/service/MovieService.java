@@ -40,6 +40,9 @@ public class MovieService {
                 break;
             // 극장별
             case 1:
+                if(filter[1] - 1 >= Theater.values().length) {
+                    return;
+                }
                 Theater theater = Theater.values()[filter[1] - 1];
                 System.out.println("선택한 극장: " + theater);
                 findMovie = mr.selectByTheater(theater);
@@ -47,6 +50,9 @@ public class MovieService {
             // 영화별
             case 2:
                 movieName = mr.selectAllMovie();
+                if(filter[1] -1 >= movieName.size()) {
+                    return;
+                }
                 MovieInfo movieInfo = movieName.get(filter[1] - 1);
                 System.out.println("선택한 영화: " + movieInfo.getMovieName());
                 findMovie = mr.selectByMovie(movieInfo.getMovieName());
@@ -55,7 +61,7 @@ public class MovieService {
             case 3:
                 int lastDayOfMonth = YearMonth.of(2025, 2).lengthOfMonth();
                 int day = lastDayOfMonth;
-                if(filter[1] <= 0 || filter[1] > lastDayOfMonth)
+                if(filter[1] > lastDayOfMonth)
                     day = lastDayOfMonth;
                 else
                     day = filter[1];
