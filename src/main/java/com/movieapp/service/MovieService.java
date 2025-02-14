@@ -136,10 +136,28 @@ public class MovieService {
         System.out.println("선택한 영화는");
         System.out.println(filteredSchedules.get(movieNo-1) + "인원 수는 " + people);
 
-        sc.nextLine();
         System.out.print("좌석 열을 선택하세요: ");
+        SeatRow seatRow = SeatRow.valueOf(sc.next().toUpperCase());
+        sc.nextLine();
 
+        System.out.print("좌석 번호를 선택하세요: ");
 
+        SeatColumn column = SeatColumn.fromInt(sc.nextInt());
+
+        System.out.println("선택한 좌석: " + seatRow + "열 " + column + "번");
+
+        int price = 15000;
+        Ticket ticket = new Ticket(filteredSchedules.get(movieNo-1).getScheduleNo(), people, column, seatRow, price * people);
+        System.out.println(ticket);
+        int result = mr.insertTicket(ticket);
     }
 
+    public void findAllTicket() {
+        List<Ticket> findMembers = mr.selectAllTicket();
+
+        System.out.println("Service에서 조회 확인: ");
+        for (Ticket t : findMembers) {
+            System.out.println(t);
+        }
+    }
 }

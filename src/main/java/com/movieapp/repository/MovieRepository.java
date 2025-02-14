@@ -1,6 +1,7 @@
 package com.movieapp.repository;
 
 import com.movieapp.aggregate.*;
+import com.movieapp.stream.MyObjectOutput;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -305,5 +306,41 @@ public class MovieRepository {
             }
         }
         return movieinfoSchedule;
+    }
+
+    public int insertTicket(Ticket ticket) {
+        MyObjectOutput moo = null;
+        int result = 0;
+
+        try {
+            moo = new MyObjectOutput(
+                    new BufferedOutputStream(
+                            new FileOutputStream(ticketFile, true)
+                    )
+            );
+            moo.writeObject(ticket);
+
+            /* 설명. 컬렉션에도 신규회원 추가하기
+             *  (MyObjectOutputStream으로 이어붙인 정보는 다시 입력받아도 이전 파일로 인식)
+             *  (프로그램을 껐다 키면 다시 재인식이 되긴 함)
+             *  현재 배운 내용만으로 구현하다 보니 맞이한 한계점
+             */
+            ticketList.add(ticket);
+
+            result = 1;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (moo != null) moo.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return result;
+    }
+
+    public List<Ticket> selectAllTicket() {
+        return ticketList;
     }
 }

@@ -34,6 +34,7 @@ public class Application {
                     ms.ticketReservation();
                     break;
                 case 3:
+                    ms.findAllTicket();
                     break;
                 case 4:
                     break;
