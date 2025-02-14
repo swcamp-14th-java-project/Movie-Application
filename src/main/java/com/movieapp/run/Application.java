@@ -4,6 +4,7 @@ import com.movieapp.aggregate.Theater;
 import com.movieapp.service.MovieService;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Application {
 
@@ -54,14 +55,15 @@ public class Application {
         System.out.println("4. 날짜 별로 조회");
 
         System.out.print("조회할 내역 번호를 선택해주세요: ");
-        int filterNo = sc.nextInt();
+        int mainFilter = sc.nextInt();
         System.out.println();
 
         // 필터링 번호(1 ~ 4) 가 들어옴.
-        int deepFilterNo = 0;
-        switch(filterNo){
+        int subFilter = 0;
+
+        switch(mainFilter){
             case 1:     // 전체 스케줄 표 조회
-                deepFilterNo = 1;
+                subFilter = 1;
                 break;
             case 2:     // 극장 별로 조회
                 int theaterNo = 1;
@@ -70,26 +72,29 @@ public class Application {
                 }
                 System.out.println();
                 System.out.print("조회할 극장 번호를 입력해주세요: ");
-                deepFilterNo = sc.nextInt();
                 break;
             case 3:     // 영화 별로 조회
                 ms.showAllMovies();     // 영화 목록 보여주기
                 System.out.println();
                 System.out.print("조회할 영화 번호를 입력해주세요: ");
-                deepFilterNo = sc.nextInt();
                 break;
             case 4:     // 날짜 별로 조회
                 //  날짜 목록(2월 12일 ~ 2월 19일)
                 int dateCount = 1;
                 String[] days = {"수", "목", "금", "토", "일", "월", "화", "수"};
                 for(int i=12; i<=19; i++){
-                    System.out.println(dateCount + ". 2월 " + i + "일" + days[dateCount-1]);
+                    System.out.println(dateCount + ". 2월 " + i + "일 " + days[dateCount-1] + "요일");
                     dateCount++;
                 }
                 System.out.print("조회할 날짜 번호를 입력해주세요: ");
-                deepFilterNo = sc.nextInt();
                 break;
         }
-        return new int[]{filterNo, deepFilterNo};
+        if(mainFilter >= 1 && mainFilter <= 4) {
+            subFilter = sc.nextInt();
+
+            return new int[]{mainFilter, subFilter};
+        }
+        return null;
+
     }
 }
