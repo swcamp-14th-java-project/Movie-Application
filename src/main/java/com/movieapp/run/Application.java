@@ -99,6 +99,8 @@ public class Application {
         if(mainFilter > 1){
             subFilter = sc.nextInt();
         }
+        if(subFilter < 0)
+            return null;
         return new int[]{mainFilter, subFilter};
     }
 }

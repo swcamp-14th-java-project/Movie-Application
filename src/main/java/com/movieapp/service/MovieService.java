@@ -21,8 +21,6 @@ import java.util.Scanner;
 public class MovieService {
 
     private final MovieRepository mr = new MovieRepository();
-    private List<MovieInfo> movieInfo = mr.selectAllMovies(); // 영화 정보
-    private List<MovieSchedule> movieSchedule = mr.selectAllSchedules();
 
     public MovieService() {
         System.out.println("MovieService 생성");
@@ -30,7 +28,7 @@ public class MovieService {
 
     // 영화 상영 스케줄 표 보기
     public void showMovieSchedule(int[] scheduleFilter) {
-        if(scheduleFilter == null) {
+        if (scheduleFilter == null) {
             System.out.println("\uD83D\uDD19 메인으로 돌아가기");
             return;
         }
@@ -46,7 +44,7 @@ public class MovieService {
                 filteredSchedules = mr.selectAllSchedules();
                 break;
             case 2: // 극장 별로 조회
-                if(subFilter > Theater.values().length ) {
+                if (subFilter > Theater.values().length) {
                     System.out.println("번호를 잘못 입력하셨습니다.");
                     System.out.println("\uD83D\uDD19 메인으로 돌아가기");
                     return;
@@ -59,7 +57,7 @@ public class MovieService {
                 break;
             case 3:     // 영화 별로 조회
                 int movieSize = mr.selectAllMovies().size();
-                if(subFilter > movieSize) {
+                if (subFilter > movieSize) {
                     System.out.println("번호를 잘못 입력하셨습니다.");
                     System.out.println("\uD83D\uDD19 메인으로 돌아가기");
                     return;
@@ -69,12 +67,7 @@ public class MovieService {
                 break;
             case 4:     // 날짜별로 조회 (ex. 2025-02-16)
                 int lastDayOfMonth = YearMonth.of(2025, 2).lengthOfMonth();
-                int day = lastDayOfMonth;
-                if(mainFilter <= 0 || (subFilter+11) > lastDayOfMonth){
-                    day = lastDayOfMonth;
-                }else{
-                    day = subFilter+11;
-                }
+                int day = Math.min(subFilter + 11, lastDayOfMonth);
                 LocalDate selectedDate = LocalDate.of(2025, 2, day);
                 System.out.println("======= " + selectedDate + "스케줄 표 =======");
                 filteredSchedules = mr.selectedDateSchedule(selectedDate);
@@ -82,12 +75,12 @@ public class MovieService {
 
         }
 
-        if(filteredSchedules.size() > 0) {
-            for(MovieSchedule movieSchedule : filteredSchedules) {
+        if (!filteredSchedules.isEmpty()) {
+            for (MovieSchedule movieSchedule : filteredSchedules) {
                 System.out.println(movieSchedule.getDate() + " " + movieSchedule.getScheduleNo() + ". " + movieSchedule.getMovieInfo().getMovieName()
                         + " " + movieSchedule.getTheaterName() + " " + movieSchedule.getEmptySeats());
             }
-        }else{
+        } else {
             System.out.println("해당하는 영화가 없습니다. ");
         }
 
@@ -97,10 +90,10 @@ public class MovieService {
     }
 
     // 전체 영화 목록 조회
-    public  void showAllMovies() {
+    public void showAllMovies() {
         List<MovieInfo> allMovies = mr.selectAllMovies();
 
-        for(MovieInfo movieInfo : allMovies) {
+        for (MovieInfo movieInfo : allMovies) {
             System.out.println(movieInfo.getMovieNo() + ". " + movieInfo.getMovieName());
         }
 
@@ -111,9 +104,9 @@ public class MovieService {
     public void showAllSchedule() {
         List<MovieSchedule> allSchedules = mr.selectAllSchedules();
 
-        for(MovieSchedule movieSchedule : allSchedules) {
+        for (MovieSchedule movieSchedule : allSchedules) {
             System.out.println(movieSchedule.getDate() + " " + movieSchedule.getScheduleNo() + ". " + movieSchedule.getMovieInfo().getMovieName()
-            + " " + movieSchedule.getTheaterName() + " " + movieSchedule.getEmptySeats());
+                    + " " + movieSchedule.getTheaterName() + " " + movieSchedule.getEmptySeats());
         }
     }
 
@@ -130,10 +123,6 @@ public class MovieService {
         System.out.println("===== 해당 영화의 상영 스케줄입니다 ===== ");
 
         // 해당 번호의 영화스케줄을 불러와야함. 함수를 따로 작성해야 할듯.
-        for(MovieSchedule movieSchedule : movieSchedule) {
-            System.out.println("[스케줄]" + movieSchedule.getScreenType());
-        }
-
 
 
     }
