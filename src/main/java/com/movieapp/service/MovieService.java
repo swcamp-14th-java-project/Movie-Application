@@ -34,10 +34,11 @@ public class MovieService {
         switch (mainFilter) {
             case 1: // 전체 상영 스케줄표 조회
                 System.out.println("======= 전체 상영 스케줄 표 =======");
-                showAllSchedule();
+                filteredSchedules = mr.selectAllSchedules();
                 break;
             case 2: // 극장 별로 조회
-                if(subFilter > Theater.values().length || subFilter < Theater.values().length) {
+                if(subFilter > Theater.values().length ) {
+                    System.out.println("번호를 잘못 입력하셨습니다.");
                     System.out.println("\uD83D\uDD19 메인으로 돌아가기");
                     return;
                 }
@@ -49,7 +50,8 @@ public class MovieService {
                 break;
             case 3:     // 영화 별로 조회
                 int movieSize = mr.selectAllMovies().size();
-                if(subFilter > movieSize || subFilter < movieSize) {
+                if(subFilter > movieSize) {
+                    System.out.println("번호를 잘못 입력하셨습니다.");
                     System.out.println("\uD83D\uDD19 메인으로 돌아가기");
                     return;
                 }
@@ -59,16 +61,16 @@ public class MovieService {
             case 4:     // 날짜별로 조회 (ex. 2025-02-16)
                 int lastDayOfMonth = YearMonth.of(2025, 2).lengthOfMonth();
                 int day = lastDayOfMonth;
-                if(mainFilter <= 0 || subFilter > lastDayOfMonth){
+                if(mainFilter <= 0 || (subFilter+11) > lastDayOfMonth){
                     day = lastDayOfMonth;
+                }else{
+                    day = subFilter+11;
                 }
                 LocalDate selectedDate = LocalDate.of(2025, 2, day);
                 System.out.println("======= " + selectedDate + "스케줄 표 =======");
                 filteredSchedules = mr.selectedDateSchedule(selectedDate);
                 break;
 
-            default:
-                System.out.println("번호를 잘못 입력하셨습니다.");
         }
 
         if(filteredSchedules.size() > 0) {

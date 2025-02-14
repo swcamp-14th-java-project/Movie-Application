@@ -58,6 +58,9 @@ public class Application {
         int mainFilter = sc.nextInt();
         System.out.println();
 
+        if(mainFilter > 4 || mainFilter < 1) {
+            return null;
+        }
         // 필터링 번호(1 ~ 4) 가 들어옴.
         int subFilter = 0;
 
@@ -68,7 +71,7 @@ public class Application {
             case 2:     // 극장 별로 조회
                 int theaterNo = 1;
                 for(Theater theater :  Theater.values()) {
-                    System.out.println(theaterNo++ + " " + theater.toString());
+                    System.out.println((theater.ordinal()+1) + " " + theater.toString());
                 }
                 System.out.println();
                 System.out.print("조회할 극장 번호를 입력해주세요: ");
@@ -89,12 +92,9 @@ public class Application {
                 System.out.print("조회할 날짜 번호를 입력해주세요: ");
                 break;
         }
-        if(mainFilter >= 1 && mainFilter <= 4) {
+        if(mainFilter > 1){
             subFilter = sc.nextInt();
-
-            return new int[]{mainFilter, subFilter};
         }
-        return null;
-
+        return new int[]{mainFilter, subFilter};
     }
 }
