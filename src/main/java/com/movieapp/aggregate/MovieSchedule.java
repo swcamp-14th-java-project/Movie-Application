@@ -1,9 +1,10 @@
 package com.movieapp.aggregate;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class MovieSchedule {
+public class MovieSchedule implements Serializable {
     private MovieInfo movieInfo;    // 영화 정보
     private int scheduleNo;         // 상영 번호
     private Theater theaterName;    // 극장
