@@ -73,7 +73,7 @@ public class Application {
             System.out.println("메인 메뉴로 돌아갑니다.");
             return null;
         }
-        if (subFilter < 0){
+        if (subFilter <= 0){
             return null;
         }
 

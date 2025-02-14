@@ -37,10 +37,10 @@ public class MovieService {
                 // 네임 말고 전부 조회
                 movieName = mr.selectAllMovie();
                 movieName.forEach(System.out::println);
-                break;
+                return;
             // 극장별
             case 1:
-                if(filter[1] - 1 >= Theater.values().length) {
+                if(filter[1] > Theater.values().length) {
                     return;
                 }
                 Theater theater = Theater.values()[filter[1] - 1];
@@ -50,7 +50,7 @@ public class MovieService {
             // 영화별
             case 2:
                 movieName = mr.selectAllMovie();
-                if(filter[1] -1 >= movieName.size()) {
+                if(filter[1] > movieName.size()) {
                     return;
                 }
                 MovieInfo movieInfo = movieName.get(filter[1] - 1);
