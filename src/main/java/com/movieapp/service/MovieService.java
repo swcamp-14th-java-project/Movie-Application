@@ -27,19 +27,23 @@ public class MovieService {
 
         switch (firstFilter) {
             case 1: // 전체 상영 스케줄표 조회
+                System.out.println("======= 전체 상영 스케줄 표 =======");
                 showAllSchedule();
                 break;
             case 2: // 극장 별로 조회
+                System.out.println("======= 극장별 스케줄 표 =======");
                 Theater theater = null;
                 Theater[] theaters = Theater.values();
                 theater = theaters[secondFilter - 1];   // 극장 이름 받음.
-                System.out.println(theater);
                 filteredSchedules = mr.selectTheaterSchedule(theater);
                 break;
             case 3:     // 영화 별로 조회
+                System.out.println("======= 영화별 스케줄 표 =======");
                 filteredSchedules = mr.selectedMovieInfoSchedule(secondFilter);
                 break;
             case 4:     // 날짜별로 조회 (ex. 2025-02-16)
+                System.out.println("======= 날짜별 스케줄 표 =======");
+                
                 int days = secondFilter + 11; // 12일 ~ 19일
                 System.out.println(days);
                 LocalDate selectedDate = LocalDate.of(2025, 2, days);
@@ -53,7 +57,7 @@ public class MovieService {
             System.out.println(movieSchedule.getDate() + " " + movieSchedule.getScheduleNo() + ". " + movieSchedule.getMovieInfo().getMovieName()
                     + " " + movieSchedule.getTheaterName() + " " + movieSchedule.getEmptySeats());
         }
-
+        System.out.println();
         System.out.println("\uD83D\uDD19 메인으로 돌아가기");
 
     }
@@ -73,7 +77,6 @@ public class MovieService {
     public void showAllSchedule() {
         List<MovieSchedule> allSchedules = mr.selectAllSchedules();
 
-        System.out.println(allSchedules.toString());
         for(MovieSchedule movieSchedule : allSchedules) {
             System.out.println(movieSchedule.getDate() + " " + movieSchedule.getScheduleNo() + ". " + movieSchedule.getMovieInfo().getMovieName()
             + " " + movieSchedule.getTheaterName() + " " + movieSchedule.getEmptySeats());

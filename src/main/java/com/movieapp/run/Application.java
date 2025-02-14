@@ -54,8 +54,8 @@ public class Application {
         System.out.println("4. 날짜 별로 조회");
 
         System.out.print("조회할 내역 번호를 선택해주세요: ");
-
         int filterNo = sc.nextInt();
+        System.out.println();
 
         // 필터링 번호(1 ~ 4) 가 들어옴.
         int deepFilterNo = 0;
