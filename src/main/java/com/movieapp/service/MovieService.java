@@ -70,7 +70,7 @@ public class MovieService {
                 findMovie = mr.selectByDate(localDate);
                 break;
         }
-        if(findMovie.size() != 0)
+        if(!findMovie.isEmpty())
             findMovie.forEach(System.out::println);
         else
             System.out.println("해당하는 영화가 없습니다.");
