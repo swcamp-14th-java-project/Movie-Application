@@ -4,7 +4,6 @@ import com.movieapp.aggregate.Theater;
 import com.movieapp.service.MovieService;
 
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Application {
 
@@ -28,6 +27,7 @@ public class Application {
                     ms.showMovieSchedule(chooseScheduleFilter());
                     break;
                 case 2:
+                    ms.ticketReservation();
                     break;
                 case 3:
                     break;
