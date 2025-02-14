@@ -12,7 +12,8 @@ public enum MovieGrade {
         this.movieGrade = movieGrade;
     }
 
-    public String getMovieGrade() {
+    @Override
+    public String toString() {
         return movieGrade;
     }
 }

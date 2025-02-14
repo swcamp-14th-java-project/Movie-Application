@@ -16,7 +16,8 @@ public enum MovieGenre {
         this.genre = genre;
     }
 
-    public String getGenre() {
+    @Override
+    public String toString() {
         return genre;
     }
 }

@@ -16,7 +16,7 @@ public class MovieRepository {
 
     // MovieRepository에서 관리할 "영화리스트", "상영스케줄", "예매내역목록" 컬렉션
     private final List<MovieInfo> movieList = new ArrayList<>();   // 영화 정보 리스트
-    private final List<MovieSchedule> movieSchedule = new ArrayList<MovieSchedule>();   // 영화 상영스케줄표 목록
+    private final List<MovieSchedule> movieSchedule = new ArrayList<>();   // 영화 상영스케줄표 목록
     private final List<Ticket> ticketList = new ArrayList<>();     // 예매 내역 목록
 
     // 영화 정보 리스트가 저장되어 있는 파일
@@ -40,7 +40,7 @@ public class MovieRepository {
         }
 
          loadMovies();       // 영화 정보 리스트 읽어오기
-//        loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
+         loadSchedules();    // 영화 상영 스케줄표 목록 읽어오기
     }
 
     private void initializeData() {
@@ -194,7 +194,7 @@ public class MovieRepository {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
 
-        }catch(EOFException e){
+        } catch(EOFException e){
 
         }
         catch (IOException e) {
