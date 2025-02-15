@@ -35,6 +35,7 @@ public class MovieRepository {
     public MovieRepository() {
         System.out.println("MovieRepository 생성 테스트 ");
 
+
         if (!movieFile.exists() || !scheduleFile.exists() || !ticketFile.exists()) {
             System.out.println("파일 생성하러 가기");
             initializeData();
@@ -155,7 +156,6 @@ public class MovieRepository {
             throw new RuntimeException(e);
         } catch (EOFException e) {
 
-
         }catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -185,18 +185,6 @@ public class MovieRepository {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (EOFException e) {
-
-
-        }catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (oos != null) oos.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
 
     private void loadTickets() {
         // 파일이 존재할 경우 파일에서 Ticket 가져오기 (db -> load)

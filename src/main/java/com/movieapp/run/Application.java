@@ -27,6 +27,7 @@ public class Application {
 
             switch (input) {
                 case 1:
+
                     ms.showMovieSchedule(chooseScheduleFilter());
                     break;
                 case 2:

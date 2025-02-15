@@ -1,7 +1,12 @@
 
 package com.movieapp.service;
 
+
 import com.movieapp.aggregate.*;
+import com.movieapp.aggregate.MovieInfo;
+import com.movieapp.aggregate.MovieSchedule;
+import com.movieapp.aggregate.Theater;
+
 
 import com.movieapp.aggregate.MovieInfo;
 import com.movieapp.aggregate.MovieSchedule;
@@ -95,6 +100,7 @@ public class MovieService {
         for (MovieInfo movieInfo : allMovies) {
             System.out.println(movieInfo.getMovieNo() + ". " + movieInfo.getMovieName());
         }
+
     }
 
     // 전체 상영 스케줄표를 조회
