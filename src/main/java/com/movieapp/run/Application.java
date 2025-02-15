@@ -19,7 +19,7 @@ public class Application {
             System.out.println("1. \uD83D\uDCFD\uFE0F 영화 상영 스케줄 표 보기");
             System.out.println("2. \uD83C\uDFAB 티켓 예매하기 ");
             System.out.println("3. ✅ 예매 내역 조회하기");
-            System.out.println("4. 예매 내역 변경하기");
+            System.out.println("4. \uD83D\uDD04 예매 내역 변경하기");
             System.out.println("5. ❌ 예매 취소하기");
             System.out.println("9. \uD83D\uDD1A 프로그램 종료");
             System.out.print("메뉴를 선택해 주세요: ");
@@ -75,7 +75,7 @@ public class Application {
             case 2:     // 극장 별로 조회
                 int theaterNo = 1;
                 for(Theater theater :  Theater.values()) {
-                    System.out.println((theater.ordinal()+1) + " " + theater.toString());
+                    System.out.println((theater.ordinal()+1) + ". " + theater.toString());
                 }
                 System.out.println();
                 System.out.print("조회할 극장 번호를 입력해주세요: ");

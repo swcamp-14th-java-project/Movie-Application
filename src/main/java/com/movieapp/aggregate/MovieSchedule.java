@@ -85,14 +85,12 @@ public class MovieSchedule implements Serializable {
 
     @Override
     public String toString() {
-        return "MovieSchedule{" +
-                "movieInfo=" + movieInfo.getMovieNo() + " : " + movieInfo.getMovieName() +
-                ", scheduleNo=" + scheduleNo +
-                ", theaterName=" + theaterName +
-                ", date=" + date +
-                ", startTime=" + startTime +
-                ", emptySeats=" + emptySeats +
-                ", screenType=" + screenType +
-                '}';
+        return
+                "[영화 제목] " + movieInfo.getMovieName() +
+                " [극장] " + theaterName +
+                " [날짜] " + date +
+                " [시작 시간] " + startTime +
+                " [잔여 좌석수] " + emptySeats +
+                " [스크린 타입] " + screenType;
     }
 }

@@ -3,6 +3,7 @@ package com.movieapp.aggregate;
 import java.io.Serializable;
 
 public class Ticket implements Serializable {
+    private MovieSchedule movieSchedule;
     private int ticketNo;   // 예매 등록 번호
     private int movieNo; // 영화 등록 번호
     private int numPeople; // 인원 수
@@ -13,13 +14,28 @@ public class Ticket implements Serializable {
     public Ticket() {
     }
 
-    public Ticket(int ticketNo, int movieNo, int numPeople, SeatColumn seatColumn, SeatRow seatRow, int price) {
+
+    public Ticket(MovieSchedule movieSchedule, int ticketNo, int movieNo, int numPeople, SeatColumn seatColumn, SeatRow seatRow, int price) {
+        this.movieSchedule = movieSchedule;
         this.ticketNo = ticketNo;
         this.movieNo = movieNo;
         this.numPeople = numPeople;
         this.seatColumn = seatColumn;
         this.seatRow = seatRow;
         this.price = price;
+    }
+
+//    public Ticket(int ticketNo, int movieNo, int numPeople, SeatColumn seatColumn, SeatRow seatRow, int price) {
+//        this.ticketNo = ticketNo;
+//        this.movieNo = movieNo;
+//        this.numPeople = numPeople;
+//        this.seatColumn = seatColumn;
+//        this.seatRow = seatRow;
+//        this.price = price;
+//    }
+
+    public String getMovieName() {
+        return movieSchedule.getMovieInfo().getMovieName();
     }
 
     public int getTicketNo() { return ticketNo; }
@@ -68,13 +84,11 @@ public class Ticket implements Serializable {
 
     @Override
     public String toString() {
-        return "Ticket{" +
-                "ticketNo=" + ticketNo +
-                ", movieNo=" + movieNo +
-                ", numPeople=" + numPeople +
-                ", seatColumn=" + seatColumn +
-                ", seatRow=" + seatRow +
-                ", price=" + price +
-                '}';
+        return  "[예매 번호] " + ticketNo +
+                " [영화 제목] " + getMovieName() +
+                " [인원 수] " + numPeople +
+                " [좌석 열] " + seatRow +
+                " [좌석 번호] " + getSeatColumn().getSeatColumn() +
+                " [가격] " + price;
     }
 }

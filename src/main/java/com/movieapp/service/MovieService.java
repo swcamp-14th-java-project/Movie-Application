@@ -76,8 +76,8 @@ public class MovieService {
 
         if (!filteredSchedules.isEmpty()) {
             for (MovieSchedule movieSchedule : filteredSchedules) {
-                System.out.println(movieSchedule.getDate() + " " + movieSchedule.getScheduleNo() + ". " + movieSchedule.getMovieInfo().getMovieName()
-                        + " " + movieSchedule.getTheaterName() + " " + movieSchedule.getEmptySeats());
+                System.out.println("[날짜] " + movieSchedule.getDate() + " [상영 번호] " + movieSchedule.getScheduleNo() + " [영화 제목] " + movieSchedule.getMovieInfo().getMovieName()
+                        + " [극장] " + movieSchedule.getTheaterName() + " [잔여 좌석수] " + movieSchedule.getEmptySeats());
             }
         } else {
             System.out.println("해당하는 영화가 없습니다. ");
@@ -95,8 +95,6 @@ public class MovieService {
         for (MovieInfo movieInfo : allMovies) {
             System.out.println(movieInfo.getMovieNo() + ". " + movieInfo.getMovieName());
         }
-
-
     }
 
     // 전체 상영 스케줄표를 조회
@@ -109,45 +107,49 @@ public class MovieService {
         }
     }
 
-    // 티켓 예매
+    // 티켓 예매하기
     public void ticketReservation() {
         showAllMovies();
 
         Scanner sc = new Scanner(System.in);
+        System.out.println();
         System.out.print("예매할 영화 번호를 선택해주세요: ");
         int movieNo = sc.nextInt();
 
-//        System.out.println(movieInfo.get(movieNo-1)); // 사용자가 선택한 영화 정보 출력
-
         System.out.println("===== 해당 영화의 상영 스케줄입니다 ===== ");
 
-        // 해당 번호의 영화스케줄을 불러와야함. 함수를 따로 작성해야 할듯.
         List<MovieSchedule> filteredSchedules = mr.selectedMovieInfoSchedule(movieNo);
 
         int index = 1;
         for(MovieSchedule m : filteredSchedules) {
-            System.out.println(index + ". " + m);
+            System.out.println("[상영 번호] " + index + " [영화 제목] " + m.getMovieInfo().getMovieName() + " [극장] "
+                    + m.getTheaterName() + " [날짜] " + m.getDate() + " [시작 시간] " + m.getStartTime() + " [잔여 좌석수] "
+                    + m.getEmptySeats() + " [스크린 타입] " + m.getScreenType());
             index++;
         }
-        System.out.print("예매할 영화 번호를 선택해주세요: ");
-        movieNo = sc.nextInt();
+
+        System.out.println();
+        System.out.print("예매할 영화 상영 번호를 선택해주세요: ");
+        int movieSchedulNo = sc.nextInt();
         System.out.print("예매할 인원 수를 선택해주세요: ");
         int people = sc.nextInt();
 
-        System.out.println("선택한 영화는");
-        System.out.println(filteredSchedules.get(movieNo-1) + "인원 수는 " + people);
+        System.out.println("선택하신 영화는");
+        System.out.println(filteredSchedules.get(movieSchedulNo-1) + " [인원 수] " + people);
+        MovieSchedule selectedSchedule = filteredSchedules.get(movieSchedulNo - 1);
 
         SeatRow[] seatRow = new SeatRow[people];
         SeatColumn[] column = new SeatColumn[people];
         for (int i = 0; i < people; i++) {
-            System.out.print("좌석 열을 선택하세요: ");
+            System.out.print((i+1) + "번 째 좌석 열을 선택하세요 (A~H): ");
             seatRow[i] = SeatRow.valueOf(sc.next().toUpperCase());
             sc.nextLine();
 
-            System.out.print("좌석 번호를 선택하세요: ");
+            System.out.print((i+1) + "번 째 좌석 번호를 선택하세요 (1~10): ");
 
             column[i] = SeatColumn.fromInt(sc.nextInt());
-            System.out.println("선택한 좌석: " + seatRow[i] + "열 " + column[i] + "번");
+            System.out.println("선택한 좌석: " + seatRow[i] + "열 " + column[i].getSeatColumn() + "번");
+            System.out.println();
         }
 
         int price = 15000;
@@ -155,18 +157,23 @@ public class MovieService {
         int lastTicketNum = mr.selectLastTicketNo();
         Ticket[] ticket = new Ticket[people];
         for (int i = 0; i < people; i++) {
-            ticket[i] = new Ticket(lastTicketNum + 1, filteredSchedules.get(movieNo-1).getScheduleNo(), people, column[i], seatRow[i], price * people);
+            ticket[i] = new Ticket(selectedSchedule,lastTicketNum + 1,
+                                    filteredSchedules.get(movieSchedulNo-1).getScheduleNo(),
+                                    people, column[i], seatRow[i], price * people);
         }
-//        Ticket ticket = new Ticket(lastTicketNum, filteredSchedules.get(movieNo-1).getScheduleNo(), people, column, seatRow, price * people);
-//        System.out.println(ticket);
-        int result = mr.insertTicket(ticket);
+        System.out.println("티켓이 성공적으로 예매되었습니다! ");
+
+        // movieListDB 에서 예매한 인원 수 만큼 잔여좌석수 감소
+
+
+        int ticketLength = mr.insertTicket(ticket);
     }
 
     public void findAllTicket() {
-        List<Ticket> findMembers = mr.selectAllTicket();
+        List<Ticket> findTickets = mr.selectAllTicket();
 
-        System.out.println("Service에서 조회 확인: ");
-        for (Ticket t : findMembers) {
+        System.out.println("예매하신 티켓 내역 확인: ");
+        for (Ticket t : findTickets) {
             System.out.println(t);
         }
     }
