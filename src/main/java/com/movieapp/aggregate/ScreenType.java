@@ -12,7 +12,8 @@ public enum ScreenType {
         this.screenType = screenType;
     }
 
-    public String getScreenType() {
+    @Override
+    public String toString() {
         return screenType;
     }
 }

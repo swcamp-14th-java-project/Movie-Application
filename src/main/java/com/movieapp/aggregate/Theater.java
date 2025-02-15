@@ -12,7 +12,8 @@ public enum Theater {
         this.theater = theater;
     }
 
-    public String getTheater() {
+    @Override
+    public String toString() {
         return theater;
     }
 }
